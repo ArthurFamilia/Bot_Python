@@ -5,3 +5,15 @@
 2025-06-18 19:47:08,916 - ERROR - Failed to fetch historical data
 2025-06-18 19:48:09,197 - ERROR - Erro ao buscar dados históricos: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
 2025-06-18 19:48:09,197 - ERROR - Failed to fetch historical data
+2025-06-18 19:49:09,477 - ERROR - Erro ao buscar dados históricos: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+2025-06-18 19:49:09,489 - ERROR - Failed to fetch historical data
+2025-06-18 19:50:09,760 - ERROR - Erro ao buscar dados históricos: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+2025-06-18 19:50:09,760 - ERROR - Failed to fetch historical data
+2025-06-18 19:51:10,041 - ERROR - Erro ao buscar dados históricos: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+2025-06-18 19:51:10,042 - ERROR - Failed to fetch historical data
+2025-06-18 19:52:10,316 - ERROR - Erro ao buscar dados históricos: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+2025-06-18 19:52:10,316 - ERROR - Failed to fetch historical data
+2025-06-18 19:53:10,597 - ERROR - Erro ao buscar dados históricos: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+2025-06-18 19:53:10,597 - ERROR - Failed to fetch historical data
+2025-06-18 19:54:10,875 - ERROR - Erro ao buscar dados históricos: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+2025-06-18 19:54:10,875 - ERROR - Failed to fetch historical data
