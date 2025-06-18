@@ -4,18 +4,19 @@ import os
 import pandas as pd
 import logging
 
+# Carrega variáveis de ambiente do arquivo .env
 dotenv.load_dotenv()
 
 class BinanceConnection:
     def __init__(self, api_key: str, api_secret: str, testnet: bool = False):
         """
         Inicializa a conexão com a Binance usando ccxt.
-        
         Parâmetros:
             api_key (str): Sua chave de API da Binance
             api_secret (str): Seu segredo de API da Binance
             testnet (bool): Se True, conecta na testnet de futuros
         """
+        # Configura o cliente ccxt para Binance Futures
         if testnet:
             self.client = ccxt.binance({
                 'apiKey': api_key,
@@ -49,16 +50,15 @@ class BinanceConnection:
     def get_historical_klines(self, symbol: str, interval: str, limit: int = 100):
         """
         Busca dados históricos de candles (klines) usando ccxt.
-        
         Parâmetros:
             symbol (str): Par de negociação (ex: 'BTC/USDT')
             interval (str): Intervalo do candle (ex: '1h', '4h', '1d')
             limit (int): Quantidade de candles a buscar
-        
         Retorna:
             pandas.DataFrame: Dados históricos de preços
         """
         try:
+            # Busca os dados OHLCV (open, high, low, close, volume)
             ohlcv = self.client.fetch_ohlcv(symbol, timeframe=interval, limit=limit)
             df = pd.DataFrame(ohlcv, columns=['timestamp', 'open', 'high', 'low', 'close', 'volume'])
             df['timestamp'] = pd.to_datetime(df['timestamp'], unit='ms')
@@ -70,17 +70,16 @@ class BinanceConnection:
     def place_order(self, symbol: str, side: str, quantity: float, order_type: str = 'market'):
         """
         Envia uma ordem para os Futuros da Binance usando ccxt.
-        
         Parâmetros:
             symbol (str): Par de negociação (ex: 'BTC/USDT')
             side (str): 'buy' para compra ou 'sell' para venda
             quantity (float): Quantidade da ordem
             order_type (str): Tipo de ordem (padrão: 'market')
-        
         Retorna:
             dict: Resposta da Binance sobre a ordem
         """
         try:
+            # Cria a ordem de acordo com os parâmetros
             order = self.client.create_order(
                 symbol=symbol,
                 type=order_type,
@@ -96,11 +95,11 @@ class BinanceConnection:
     def get_account_balance(self):
         """
         Consulta o saldo da conta de futuros usando ccxt.
-        
         Retorna:
             dict: Informações de saldo da conta
         """
         try:
+            # Busca o saldo da conta
             balance = self.client.fetch_balance()
             self.logger.info(f"Saldo da conta obtido: {balance}")
             return balance

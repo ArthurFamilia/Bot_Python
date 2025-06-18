@@ -3,3 +3,5 @@
 2025-06-18 19:46:08,639 - ERROR - Failed to fetch historical data
 2025-06-18 19:47:08,915 - ERROR - Erro ao buscar dados históricos: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
 2025-06-18 19:47:08,916 - ERROR - Failed to fetch historical data
+2025-06-18 19:48:09,197 - ERROR - Erro ao buscar dados históricos: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+2025-06-18 19:48:09,197 - ERROR - Failed to fetch historical data
