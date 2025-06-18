@@ -1,0 +1,5 @@
+2025-06-18 19:46:08,120 - INFO - Starting trading bot for BTCUSDT on 1h timeframe
+2025-06-18 19:46:08,638 - ERROR - Erro ao buscar dados históricos: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+2025-06-18 19:46:08,639 - ERROR - Failed to fetch historical data
+2025-06-18 19:47:08,915 - ERROR - Erro ao buscar dados históricos: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+2025-06-18 19:47:08,916 - ERROR - Failed to fetch historical data
