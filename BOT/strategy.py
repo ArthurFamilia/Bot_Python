@@ -3,7 +3,7 @@ import numpy as np
 import logging
 
 class TradingStrategy:
-    def __init__(self, short_window: int = 20, long_window: int = 50):
+    def __init__(self, short_window: int = 8, long_window: int = 17):
         """
         Inicializa a estratégia de trading com parâmetros de médias móveis.
         

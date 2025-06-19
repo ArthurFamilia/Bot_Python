@@ -101,9 +101,27 @@ class BinanceConnection:
         try:
             # Busca o saldo da conta
             balance = self.client.fetch_balance()
-            self.logger.info(f"Saldo da conta obtido: {balance}")
             return balance
         except Exception as e:
             self.logger.error(f"Erro ao obter saldo da conta: {str(e)}")
             return None
+    
+    def test_connection(self):
+        """
+        Testa a conexão com a API da Binance Futures.
+        Retorna:
+            bool: True se a conexão for bem-sucedida, False caso contrário
+        """
+        try:
+            # O método fetch_time retorna o timestamp do servidor se a conexão estiver ok
+            server_time = self.client.fetch_time()
+            if isinstance(server_time, int):
+                self.logger.info(f"Conexão com a Binance Futures bem-sucedida! Timestamp: {server_time}")
+                return True
+            else:
+                self.logger.warning(f"Resposta inesperada ao testar conexão: {server_time}")
+                return False
+        except Exception as e:
+            self.logger.error(f"Erro ao testar conexão com a Binance Futures: {e}")
+            return False
 
