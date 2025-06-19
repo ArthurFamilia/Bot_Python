@@ -13,7 +13,7 @@ INTERVAL = '1h'
 LIMIT = 500
 
 # Conecte-se à Binance e obtenha os dados históricos
-conn = BinanceConnection(API_KEY, API_SECRET, testnet=True)
+conn = BinanceConnection(API_KEY, API_SECRET, testnet=False)
 df = conn.get_historical_klines(SYMBOL, INTERVAL, LIMIT)
 
 if df is None:

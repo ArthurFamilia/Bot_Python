@@ -66,7 +66,7 @@ class Optimizer:
         self.backtester = backtester
         self.strategy_class = strategy_class
 
-    def optimize(self, df: pd.DataFrame, param_grid: dict, risk_percentage=0.02):
+    def optimize(self, df: pd.DataFrame, param_grid: dict, risk_percentage=3.0):
         # Busca os melhores parâmetros de médias móveis
         best_result = -np.inf
         best_params = None
