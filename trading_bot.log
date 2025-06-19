@@ -940,3 +940,15 @@
 2025-06-18 20:25:49,355 - INFO - Saldo USDT (margem cruzada): 0.03277985
 2025-06-18 20:25:49,356 - INFO - Saldo BNB (margem cruzada): 0.00000000
 2025-06-18 20:25:49,356 - INFO - Nenhuma posição aberta no momento.
+2025-06-18 22:03:28,876 - INFO - Conexão com a Binance Futures bem-sucedida! Timestamp: 1750295008109
+2025-06-18 22:03:28,877 - INFO - Starting trading bot for BTC/USDT on 5m timeframe
+2025-06-18 22:03:32,237 - INFO - Ping/Time da API: 2025-06-19 01:03:31 (timestamp: 1750295011478)
+2025-06-18 22:03:36,250 - INFO - Status: Dados históricos captados com sucesso.
+2025-06-18 22:03:36,530 - INFO - Saldo USDT (margem cruzada): 0.03277985
+2025-06-18 22:03:36,531 - INFO - Saldo BNB (margem cruzada): 0.00000000
+2025-06-18 22:03:36,531 - INFO - Nenhuma posição aberta no momento.
+2025-06-18 22:03:38,826 - INFO - Ping/Time da API: 2025-06-19 01:03:38 (timestamp: 1750295018070)
+2025-06-18 22:03:39,101 - INFO - Status: Dados históricos captados com sucesso.
+2025-06-18 22:03:39,382 - INFO - Saldo USDT (margem cruzada): 0.03277985
+2025-06-18 22:03:39,382 - INFO - Saldo BNB (margem cruzada): 0.00000000
+2025-06-18 22:03:39,383 - INFO - Nenhuma posição aberta no momento.
