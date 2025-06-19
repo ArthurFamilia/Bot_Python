@@ -26,7 +26,7 @@ backtester = Backtester()
 # Defina a grade de parâmetros para otimização
 grid = {
     'short_window': range(5, 30, 1),
-    'long_window': range(15, 100, 1)
+    'long_window': range(15, 200, 1)
 }
 
 # Instancie o otimizador

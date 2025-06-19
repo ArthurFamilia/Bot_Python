@@ -11,8 +11,8 @@ API_SECRET = os.getenv('BINANCE_API_SECRET', 'SEU_API_SECRET')
 
 # Parâmetros de busca de dados
 SYMBOL = 'BTC/USDT'
-INTERVAL = '1h'
-LIMIT = 2000
+INTERVAL = '30m'
+LIMIT = 500
 
 # Conecte-se à Binance e obtenha os dados históricos
 df = None
@@ -30,10 +30,10 @@ if df is None:
 backtester = Backtester()
 
 # Defina a estratégia
-strategy = TradingStrategy(short_window=30, long_window=120)
+strategy = TradingStrategy(short_window=20, long_window=39)
 
 # Execute o backtest
-final_balance, trades = backtester.run(df, strategy, risk_percentage=2.0)
+final_balance, trades = backtester.run(df, strategy, risk_percentage=0.03)
 
 # Converter trades para DataFrame
 trades_df = pd.DataFrame(trades)

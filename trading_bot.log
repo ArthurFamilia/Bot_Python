@@ -952,3 +952,8 @@
 2025-06-18 22:03:39,382 - INFO - Saldo USDT (margem cruzada): 0.03277985
 2025-06-18 22:03:39,382 - INFO - Saldo BNB (margem cruzada): 0.00000000
 2025-06-18 22:03:39,383 - INFO - Nenhuma posição aberta no momento.
+2025-06-18 23:15:49,840 - ERROR - Erro ao buscar dados históricos: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+2025-06-18 23:19:46,670 - ERROR - Erro ao buscar dados históricos: binance GET https://dapi.binance.com/dapi/v1/exchangeInfo
+2025-06-18 23:24:39,311 - ERROR - Erro ao buscar dados históricos: binance GET https://dapi.binance.com/dapi/v1/exchangeInfo
+2025-06-18 23:26:38,907 - ERROR - Erro ao buscar dados históricos: binance GET https://dapi.binance.com/dapi/v1/exchangeInfo
+2025-06-18 23:27:00,531 - ERROR - Erro ao buscar dados históricos: binance GET https://dapi.binance.com/dapi/v1/exchangeInfo

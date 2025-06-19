@@ -6,7 +6,7 @@ class Backtester:
     """
     Classe para simular operações de trading com base nos sinais da estratégia.
     """
-    def __init__(self, initial_balance=1000.0, fee=0.0004):
+    def __init__(self, initial_balance=1000.0, fee=0.04):
         # Saldo inicial da simulação
         self.initial_balance = initial_balance
         # Taxa de corretagem (exemplo: 0.04%)
