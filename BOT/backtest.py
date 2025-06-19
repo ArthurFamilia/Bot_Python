@@ -12,7 +12,7 @@ class Backtester:
         # Taxa de corretagem (exemplo: 0.04%)
         self.fee = fee
 
-    def run(self, df: pd.DataFrame, strategy: TradingStrategy, risk_percentage=2):
+    def run(self, df: pd.DataFrame, strategy: TradingStrategy, risk_percentage=2.0):
         # Inicializa variáveis de controle
         balance = self.initial_balance
         position = 0  # 1 para comprado, -1 para vendido, 0 para fora
