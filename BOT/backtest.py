@@ -12,7 +12,7 @@ class Backtester:
         # Taxa de corretagem (exemplo: 0.04%)
         self.fee = fee
 
-    def run(self, df: pd.DataFrame, strategy: TradingStrategy, risk_percentage=0.02):
+    def run(self, df: pd.DataFrame, strategy: TradingStrategy, risk_percentage=2):
         # Inicializa variáveis de controle
         balance = self.initial_balance
         position = 0  # 1 para comprado, -1 para vendido, 0 para fora
@@ -30,7 +30,7 @@ class Backtester:
                     balance += pnl
                     trades.append({'type': 'COVER', 'price': price, 'balance': balance})
                 # Abre compra
-                size = (balance * risk_percentage) / price
+                size = (self.initial_balance * risk_percentage) / price  # Corrigido para usar saldo inicial
                 entry_price = price
                 position = 1
                 trades.append({'type': 'BUY', 'price': price, 'balance': balance})
@@ -41,7 +41,7 @@ class Backtester:
                     balance += pnl
                     trades.append({'type': 'SELL', 'price': price, 'balance': balance})
                 # Abre venda
-                size = (balance * risk_percentage) / price
+                size = (self.initial_balance * risk_percentage) / price  # Corrigido para usar saldo inicial
                 entry_price = price
                 position = -1
                 trades.append({'type': 'SHORT', 'price': price, 'balance': balance})
