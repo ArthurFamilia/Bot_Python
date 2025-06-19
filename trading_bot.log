@@ -957,3 +957,6 @@
 2025-06-18 23:24:39,311 - ERROR - Erro ao buscar dados históricos: binance GET https://dapi.binance.com/dapi/v1/exchangeInfo
 2025-06-18 23:26:38,907 - ERROR - Erro ao buscar dados históricos: binance GET https://dapi.binance.com/dapi/v1/exchangeInfo
 2025-06-18 23:27:00,531 - ERROR - Erro ao buscar dados históricos: binance GET https://dapi.binance.com/dapi/v1/exchangeInfo
+2025-06-19 08:55:57,171 - ERROR - Erro ao buscar dados históricos: binance {"code":-1021,"msg":"Timestamp for this request was 1000ms ahead of the server's time."}
+2025-06-19 08:56:25,078 - ERROR - Erro ao buscar dados históricos: binance {"code":-1021,"msg":"Timestamp for this request was 1000ms ahead of the server's time."}
+2025-06-19 08:57:03,278 - ERROR - Erro ao buscar dados históricos: binance {"code":-1021,"msg":"Timestamp for this request was 1000ms ahead of the server's time."}

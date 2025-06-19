@@ -1,0 +1,21 @@
+# Arquivos de ambiente
+.env
+.env.*
+
+# Cache Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Logs
+*.log
+trading_bot.log
+
+# Resultados de otimização
+resultados_otimizacao.csv
+
+# Ambiente virtual
+venv/
+env/
+.venv/
+.env/

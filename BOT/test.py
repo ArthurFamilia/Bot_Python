@@ -1,1 +1,0 @@
-self.client.load_markets(True)

@@ -8,7 +8,7 @@ API_KEY = os.getenv('BINANCE_API_KEY', 'SUA_API_KEY')
 API_SECRET = os.getenv('BINANCE_API_SECRET', 'SEU_API_SECRET')
 
 # Parâmetros de busca de dados
-SYMBOL = 'BTC/USDT'
+SYMBOL = 'ADA/USDT'
 INTERVAL = '1h'
 LIMIT = 500
 
