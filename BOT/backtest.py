@@ -17,6 +17,7 @@ class Backtester:
         balance = self.initial_balance
         position = 0  # 1 para comprado, -1 para vendido, 0 para fora
         entry_price = 0
+        entry_size = 0  # Armazena o tamanho da posição aberta
         trades = []
         # Calcula sinais da estratégia
         df = strategy.calculate_signals(df)
@@ -26,22 +27,22 @@ class Backtester:
             if signal == 1 and position <= 0:
                 # Fecha venda se houver
                 if position == -1:
-                    pnl = (entry_price - price) * size - (price + entry_price) * size * self.fee
+                    pnl = (entry_price - price) * entry_size - (price + entry_price) * entry_size * self.fee
                     balance += pnl
                     trades.append({'type': 'COVER', 'price': price, 'balance': balance})
                 # Abre compra
-                size = (self.initial_balance * risk_percentage) / price  # Corrigido para usar saldo inicial
+                entry_size = (balance * risk_percentage) / price  # Usa saldo atual
                 entry_price = price
                 position = 1
                 trades.append({'type': 'BUY', 'price': price, 'balance': balance})
             elif signal == -1 and position >= 0:
                 # Fecha compra se houver
                 if position == 1:
-                    pnl = (price - entry_price) * size - (price + entry_price) * size * self.fee
+                    pnl = (price - entry_price) * entry_size - (price + entry_price) * entry_size * self.fee
                     balance += pnl
                     trades.append({'type': 'SELL', 'price': price, 'balance': balance})
                 # Abre venda
-                size = (self.initial_balance * risk_percentage) / price  # Corrigido para usar saldo inicial
+                entry_size = (balance * risk_percentage) / price  # Usa saldo atual
                 entry_price = price
                 position = -1
                 trades.append({'type': 'SHORT', 'price': price, 'balance': balance})
@@ -49,9 +50,9 @@ class Backtester:
         if position != 0:
             price = df['close'].iloc[-1]
             if position == 1:
-                pnl = (price - entry_price) * size - (price + entry_price) * size * self.fee
+                pnl = (price - entry_price) * entry_size - (price + entry_price) * entry_size * self.fee
             else:
-                pnl = (entry_price - price) * size - (price + entry_price) * size * self.fee
+                pnl = (entry_price - price) * entry_size - (price + entry_price) * entry_size * self.fee
             balance += pnl
             trades.append({'type': 'CLOSE', 'price': price, 'balance': balance})
         # Retorna saldo final e lista de operações
