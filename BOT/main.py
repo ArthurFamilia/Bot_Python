@@ -30,7 +30,6 @@ def bot_loop(run_event):
     strategy = TradingStrategy(short_window=config.MArapida, long_window=config.MAlenta)
     symbol = config.simbolo  # Par de negociação para ccxt
     interval = config.intervalo    # Intervalo do candle
-    risk_percentage = config.risco  # Risco por operação (2%)
     logger.info(f"Starting trading bot for {symbol} on {interval} timeframe")
     trade_state = {
         'open': False,
@@ -81,8 +80,7 @@ def bot_loop(run_event):
                 current_price = float(df['close'].iloc[-1])
                 position_size = strategy.get_position_size(
                     float(balance['total']['USDT']) if 'total' in balance and 'USDT' in balance['total'] else 0.0,
-                    current_price,
-                    risk_percentage
+                    current_price
                 )
                 # Se não há posição aberta e sinal de compra/venda, abre posição
                 if not trade_state['open'] and position_size:
