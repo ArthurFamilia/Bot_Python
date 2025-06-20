@@ -10,13 +10,13 @@ API_SECRET = os.getenv('BINANCE_API_SECRET', 'SEU_API_SECRET')
 
 # Lista de símbolos e intervalos para testar
 SYMBOLS = ['BTC/USDT', 'ETH/USDT', 'BNB/USDT', 'ADA/USDT', 'XRP/USDT', 'SOL/USDT']
-INTERVALS = ['15m', '30m', '1h', '2h', '4h', '1d']
-LIMIT = 500
+INTERVALS = ['5m', '15m', '30m', '1h', '2h', '4h', '6h', '1d']
+LIMIT = 5000
 
 # Grade de parâmetros para otimização
 GRID = {
-    'short_window': range(5, 30, 1),
-    'long_window': range(15, 200, 1)
+    'short_window': range(8, 100, 2),
+    'long_window': range(20, 200, 2)
 }
 
 def otimizar_parametros():

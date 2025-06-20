@@ -960,3 +960,79 @@
 2025-06-19 08:55:57,171 - ERROR - Erro ao buscar dados históricos: binance {"code":-1021,"msg":"Timestamp for this request was 1000ms ahead of the server's time."}
 2025-06-19 08:56:25,078 - ERROR - Erro ao buscar dados históricos: binance {"code":-1021,"msg":"Timestamp for this request was 1000ms ahead of the server's time."}
 2025-06-19 08:57:03,278 - ERROR - Erro ao buscar dados históricos: binance {"code":-1021,"msg":"Timestamp for this request was 1000ms ahead of the server's time."}
+2025-06-19 18:38:37,751 - INFO - Conexão com a Binance Futures bem-sucedida! Timestamp: 1750369117226
+2025-06-19 18:38:37,752 - INFO - Starting trading bot for BTC/USDT on 5m timeframe
+2025-06-19 18:38:40,650 - INFO - Ping/Time da API: 2025-06-19 21:38:40 (timestamp: 1750369120120)
+2025-06-19 18:38:44,549 - INFO - Status: Dados históricos captados com sucesso.
+2025-06-19 18:38:44,841 - INFO - Saldo USDT (margem cruzada): 0.03277985
+2025-06-19 18:38:44,841 - INFO - Saldo BNB (margem cruzada): 0.00000000
+2025-06-19 18:38:44,842 - INFO - Nenhuma posição aberta no momento.
+2025-06-19 18:38:47,142 - INFO - Ping/Time da API: 2025-06-19 21:38:46 (timestamp: 1750369126612)
+2025-06-19 18:38:47,415 - INFO - Status: Dados históricos captados com sucesso.
+2025-06-19 18:38:47,699 - INFO - Saldo USDT (margem cruzada): 0.03277985
+2025-06-19 18:38:47,699 - INFO - Saldo BNB (margem cruzada): 0.00000000
+2025-06-19 18:38:47,700 - INFO - Nenhuma posição aberta no momento.
+2025-06-19 18:38:49,973 - INFO - Ping/Time da API: 2025-06-19 21:38:49 (timestamp: 1750369129443)
+2025-06-19 18:38:50,247 - INFO - Status: Dados históricos captados com sucesso.
+2025-06-19 18:38:50,523 - INFO - Saldo USDT (margem cruzada): 0.03277985
+2025-06-19 18:38:50,524 - INFO - Saldo BNB (margem cruzada): 0.00000000
+2025-06-19 18:38:50,524 - INFO - Nenhuma posição aberta no momento.
+2025-06-19 18:38:52,807 - INFO - Ping/Time da API: 2025-06-19 21:38:52 (timestamp: 1750369132274)
+2025-06-19 18:38:53,090 - INFO - Status: Dados históricos captados com sucesso.
+2025-06-19 18:38:53,363 - INFO - Saldo USDT (margem cruzada): 0.03277985
+2025-06-19 18:38:53,364 - INFO - Saldo BNB (margem cruzada): 0.00000000
+2025-06-19 18:38:53,364 - INFO - Nenhuma posição aberta no momento.
+2025-06-19 18:38:55,644 - INFO - Ping/Time da API: 2025-06-19 21:38:55 (timestamp: 1750369135113)
+2025-06-19 18:38:55,920 - INFO - Status: Dados históricos captados com sucesso.
+2025-06-19 18:38:56,199 - INFO - Saldo USDT (margem cruzada): 0.03277985
+2025-06-19 18:38:56,200 - INFO - Saldo BNB (margem cruzada): 0.00000000
+2025-06-19 18:38:56,200 - INFO - Nenhuma posição aberta no momento.
+2025-06-19 18:38:58,471 - INFO - Ping/Time da API: 2025-06-19 21:38:57 (timestamp: 1750369137945)
+2025-06-19 18:38:58,747 - INFO - Status: Dados históricos captados com sucesso.
+2025-06-19 18:38:59,018 - INFO - Saldo USDT (margem cruzada): 0.03277985
+2025-06-19 18:38:59,018 - INFO - Saldo BNB (margem cruzada): 0.00000000
+2025-06-19 18:38:59,019 - INFO - Nenhuma posição aberta no momento.
+2025-06-19 18:39:01,305 - INFO - Ping/Time da API: 2025-06-19 21:39:00 (timestamp: 1750369140777)
+2025-06-19 18:39:01,581 - INFO - Status: Dados históricos captados com sucesso.
+2025-06-19 18:39:01,864 - INFO - Saldo USDT (margem cruzada): 0.03277985
+2025-06-19 18:39:01,864 - INFO - Saldo BNB (margem cruzada): 0.00000000
+2025-06-19 18:39:01,865 - INFO - Nenhuma posição aberta no momento.
+2025-06-19 18:39:04,147 - INFO - Ping/Time da API: 2025-06-19 21:39:03 (timestamp: 1750369143616)
+2025-06-19 18:39:04,426 - INFO - Status: Dados históricos captados com sucesso.
+2025-06-19 18:39:04,708 - INFO - Saldo USDT (margem cruzada): 0.03277985
+2025-06-19 18:39:04,708 - INFO - Saldo BNB (margem cruzada): 0.00000000
+2025-06-19 18:39:04,709 - INFO - Nenhuma posição aberta no momento.
+2025-06-19 18:39:06,985 - INFO - Ping/Time da API: 2025-06-19 21:39:06 (timestamp: 1750369146454)
+2025-06-19 18:39:07,264 - INFO - Status: Dados históricos captados com sucesso.
+2025-06-19 18:39:07,546 - INFO - Saldo USDT (margem cruzada): 0.03277985
+2025-06-19 18:39:07,546 - INFO - Saldo BNB (margem cruzada): 0.00000000
+2025-06-19 18:39:07,547 - INFO - Nenhuma posição aberta no momento.
+2025-06-19 18:39:09,828 - INFO - Ping/Time da API: 2025-06-19 21:39:09 (timestamp: 1750369149299)
+2025-06-19 18:39:10,101 - INFO - Status: Dados históricos captados com sucesso.
+2025-06-19 18:39:10,375 - INFO - Saldo USDT (margem cruzada): 0.03277985
+2025-06-19 18:39:10,376 - INFO - Saldo BNB (margem cruzada): 0.00000000
+2025-06-19 18:39:10,376 - INFO - Nenhuma posição aberta no momento.
+2025-06-19 18:39:12,650 - INFO - Ping/Time da API: 2025-06-19 21:39:12 (timestamp: 1750369152121)
+2025-06-19 18:39:12,921 - INFO - Status: Dados históricos captados com sucesso.
+2025-06-19 18:39:13,195 - INFO - Saldo USDT (margem cruzada): 0.03277985
+2025-06-19 18:39:13,195 - INFO - Saldo BNB (margem cruzada): 0.00000000
+2025-06-19 18:39:13,196 - INFO - Nenhuma posição aberta no momento.
+2025-06-19 18:39:15,475 - INFO - Ping/Time da API: 2025-06-19 21:39:14 (timestamp: 1750369154946)
+2025-06-19 18:39:15,747 - INFO - Status: Dados históricos captados com sucesso.
+2025-06-19 18:39:16,019 - INFO - Saldo USDT (margem cruzada): 0.03277985
+2025-06-19 18:39:16,019 - INFO - Saldo BNB (margem cruzada): 0.00000000
+2025-06-19 18:39:16,019 - INFO - Nenhuma posição aberta no momento.
+2025-06-19 18:39:18,299 - INFO - Ping/Time da API: 2025-06-19 21:39:17 (timestamp: 1750369157769)
+2025-06-19 18:39:18,578 - INFO - Status: Dados históricos captados com sucesso.
+2025-06-19 18:39:18,848 - INFO - Saldo USDT (margem cruzada): 0.03277985
+2025-06-19 18:39:18,848 - INFO - Saldo BNB (margem cruzada): 0.00000000
+2025-06-19 18:39:18,849 - INFO - Nenhuma posição aberta no momento.
+2025-06-19 18:39:21,124 - INFO - Ping/Time da API: 2025-06-19 21:39:20 (timestamp: 1750369160598)
+2025-06-19 18:39:21,416 - INFO - Status: Dados históricos captados com sucesso.
+2025-06-19 18:39:21,691 - INFO - Saldo USDT (margem cruzada): 0.03277985
+2025-06-19 18:39:21,691 - INFO - Saldo BNB (margem cruzada): 0.00000000
+2025-06-19 18:39:21,691 - INFO - Nenhuma posição aberta no momento.
+2025-06-19 18:42:42,841 - INFO - Conexão com a Binance Futures bem-sucedida! Timestamp: 1750369362306
+2025-06-19 18:42:42,842 - INFO - Starting trading bot for BTC/USDT on 5m timeframe
+2025-06-19 18:52:29,244 - INFO - Conexão com a Binance Futures bem-sucedida! Timestamp: 1750369948693
+2025-06-19 18:52:29,245 - INFO - Starting trading bot for BTC/USDT on 1m timeframe

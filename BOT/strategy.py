@@ -1,9 +1,10 @@
 import pandas as pd
 import numpy as np
 import logging
+import config  # Importa as configurações do arquivo config.py
 
 class TradingStrategy:
-    def __init__(self, short_window: int = 8, long_window: int = 17):
+    def __init__(self, short_window = config.MArapida, long_window = config.MAlenta):
         """
         Inicializa a estratégia de trading com parâmetros de médias móveis.
         
