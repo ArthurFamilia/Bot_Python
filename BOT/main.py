@@ -30,7 +30,6 @@ def bot_loop(run_event):
     strategy = TradingStrategy(short_window=config.MArapida, long_window=config.MAlenta)
     symbol = config.simbolo  # Par de negociação para ccxt
     interval = config.intervalo    # Intervalo do candle
-    risk_percentage = config.risco  # Risco por operação (2%)
     logger.info(f"Starting trading bot for {symbol} on {interval} timeframe")
     trade_state = {
         'open': False,
@@ -81,8 +80,7 @@ def bot_loop(run_event):
                 current_price = float(df['close'].iloc[-1])
                 position_size = strategy.get_position_size(
                     float(balance['total']['USDT']) if 'total' in balance and 'USDT' in balance['total'] else 0.0,
-                    current_price,
-                    risk_percentage
+                    current_price
                 )
                 # Se não há posição aberta e sinal de compra/venda, abre posição
                 if not trade_state['open'] and position_size:
@@ -165,46 +163,9 @@ def main():
     )
     # Evento para controlar execução do bot (iniciar/pausar)
     run_event = threading.Event()
-    run_event.clear()  # Começa pausado
-    # Cria thread para rodar o loop do bot em paralelo ao menu
-    bot_thread = threading.Thread(target=bot_loop, args=(run_event,), daemon=True)
-    bot_thread.start()
-    # Exibe menu interativo
-    print("\n=== MENU DO BOT DE TRADING ===")
-    print("[1] Iniciar bot")
-    print("[2] Pausar bot")
-    print("[3] Retomar bot")
-    print("[4] Sair")
-    while True:
-        op = input("Escolha uma opção: ").strip()
-        if op == '1':
-            # Inicia o bot (ativa o evento)
-            if not run_event.is_set():
-                run_event.set()
-                print("Bot iniciado!")
-            else:
-                print("Bot já está rodando.")
-        elif op == '2':
-            # Pausa o bot (limpa o evento)
-            if run_event.is_set():
-                run_event.clear()
-                print("Bot pausado.")
-            else:
-                print("Bot já está pausado.")
-        elif op == '3':
-            # Retoma o bot (ativa o evento)
-            if not run_event.is_set():
-                run_event.set()
-                print("Bot retomado!")
-            else:
-                print("Bot já está rodando.")
-        elif op == '4':
-            # Encerra o programa
-            print("Encerrando...")
-            run_event.clear()
-            break
-        else:
-            print("Opção inválida.")
+    run_event.set()  # Começa rodando imediatamente
+    # Roda o loop do bot na thread principal (sem menu)
+    bot_loop(run_event)
 
 if __name__ == "__main__":
     main()
