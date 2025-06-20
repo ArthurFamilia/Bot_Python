@@ -1047,3 +1047,5 @@
 2025-06-20 00:20:02,069 - ERROR - API credentials not found in environment variables
 2025-06-20 00:20:15,531 - INFO - Conexão com a Binance Futures bem-sucedida! Timestamp: 1750389614410
 2025-06-20 00:20:15,531 - INFO - Starting trading bot for SOL/USDT on 1d timeframe
+2025-06-20 11:08:18,880 - INFO - Conexão com a Binance Futures bem-sucedida! Timestamp: 1750428496580
+2025-06-20 11:08:18,892 - INFO - Starting trading bot for SOL/USDT on 1d timeframe

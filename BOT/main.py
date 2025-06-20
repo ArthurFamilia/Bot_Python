@@ -47,24 +47,13 @@ def bot_loop(run_event):
             if df is None:
                 time.sleep(15)
                 continue
-            # Consulta saldo da conta
             balance = connection.get_account_balance()
             usdt_cross = None
             if balance and 'info' in balance and 'assets' in balance['info']:
                 for asset in balance['info']['assets']:
                     if asset['asset'] == 'USDT':
                         usdt_cross = float(asset['crossWalletBalance'])
-                print(f"Saldo USDT: {usdt_cross:.8f}")
-            else:
-                print("[ERRO] Não foi possível obter saldo em USDT.")
-            # Consulta posições abertas
-            positions = balance['info']['positions'] if balance and 'info' in balance and 'positions' in balance['info'] else []
-            open_positions = [p for p in positions if float(p.get('positionAmt', 0)) != 0]
-            if open_positions:
-                print("Há posição aberta.")
-            else:
-                print("Nenhuma posição aberta.")
-            # Calcula sinais da estratégia
+            # Remove prints de saldo e posições abertas
             df = strategy.calculate_signals(df)
             if df is None:
                 time.sleep(15)
@@ -86,7 +75,7 @@ def bot_loop(run_event):
                 if not trade_state['open'] and position_size:
                     if current_signal == 1:
                         order = connection.place_order(symbol, 'buy', position_size)
-                        print(f"Abertura de operação: COMPRA {position_size} @ {current_price}")
+                        print(f"Abertura de operação: COMPRA {position_size} @ {current_price} | Saldo USDT: {usdt_cross if usdt_cross is not None else 'N/A'}")
                         trade_state.update({
                             'open': True,
                             'side': 'buy',
@@ -96,7 +85,7 @@ def bot_loop(run_event):
                         })
                     elif current_signal == -1:
                         order = connection.place_order(symbol, 'sell', position_size)
-                        print(f"Abertura de operação: VENDA {position_size} @ {current_price}")
+                        print(f"Abertura de operação: VENDA {position_size} @ {current_price} | Saldo USDT: {usdt_cross if usdt_cross is not None else 'N/A'}")
                         trade_state.update({
                             'open': True,
                             'side': 'sell',
@@ -117,7 +106,7 @@ def bot_loop(run_event):
                     pnl = (exit_price - trade_state['entry_price']) * trade_state['entry_volume']
                     if trade_state['side'] == 'sell':
                         pnl = -pnl
-                    print(f"Fechamento de operação: {trade_state['side'].upper()} lucro/prejuízo: {pnl:.2f}")
+                    print(f"Fechamento de operação: {trade_state['side'].upper()} lucro/prejuízo: {pnl:.2f} | Saldo USDT: {usdt_cross if usdt_cross is not None else 'N/A'}")
                     # Salva trade no arquivo JSON
                     try:
                         with open('BOT/trades.json', 'r+', encoding='utf-8') as f:
