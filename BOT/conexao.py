@@ -29,8 +29,15 @@ class BinanceConnection:
             self.client = ccxt.binance({
                 'apiKey': api_key,
                 'secret': api_secret,
-                'options': {'defaultType': 'future'}
+                'options': {'defaultType': 'future', 'adjustForTimeDifference': True}  # Adiciona ajuste de tempo
             })
+        
+        # Sincroniza o tempo com o servidor
+        try:
+            self.client.load_time_difference()
+        except Exception as e:
+            self.logger.warning(f"Não foi possível sincronizar o tempo com o servidor: {e}")
+            
         self.setup_logging()
     
     def setup_logging(self):

@@ -1,9 +1,9 @@
 import pandas as pd
-import numpy as np
 import logging
+import config  # Importa as configurações do arquivo config.py
 
 class TradingStrategy:
-    def __init__(self, short_window: int = 8, long_window: int = 17):
+    def __init__(self, short_window = config.MArapida, long_window = config.MAlenta):
         """
         Inicializa a estratégia de trading com parâmetros de médias móveis.
         
@@ -26,9 +26,9 @@ class TradingStrategy:
             pandas.DataFrame: DataFrame com colunas de sinal adicionadas
         """
         try:
-            # Calcula as médias móveis
-            df['SMA_short'] = df['close'].rolling(window=self.short_window).mean()
-            df['SMA_long'] = df['close'].rolling(window=self.long_window).mean()
+            # Calcula as médias móveis exponenciais
+            df['SMA_short'] = df['close'].ewm(span=self.short_window, adjust=False).mean()
+            df['SMA_long'] = df['close'].ewm(span=self.long_window, adjust=False).mean()
             
             # Gera sinais de trading
             df['signal'] = 0
@@ -44,9 +44,9 @@ class TradingStrategy:
             self.logger.error(f"Erro ao calcular sinais: {str(e)}")
             return None
     
-    def get_position_size(self, account_balance: float, current_price: float, risk_percentage: float = 0.02):
+    def get_position_size(self, account_balance: float, current_price: float, risk_percentage: float = None):
         """
-        Calcula o tamanho da posição com base no saldo da conta e percentual de risco.
+        Calcula o tamanho da posição com base em valor fixo em USDT.
         
         Parâmetros:
             account_balance (float): Saldo atual da conta
@@ -57,10 +57,7 @@ class TradingStrategy:
             float: Tamanho da posição em unidades do ativo
         """
         try:
-            # Calcula o valor a ser arriscado
-            risk_amount = account_balance * risk_percentage
-            # Calcula o tamanho da posição
-            position_size = risk_amount / current_price
+            position_size = config.valor_fixo_usdt / current_price
             return round(position_size, 3)  # Arredonda para 3 casas decimais
             
         except Exception as e:
