@@ -146,7 +146,7 @@ def bot_loop(run_event):
                         'entry_price': None,
                         'entry_volume': None
                     }
-            time.sleep(2)
+            time.sleep(10)  # Espera 10 segundos antes de buscar novos dados
     except KeyboardInterrupt:
         logger.info("Bot stopped by user")
     except Exception as e:

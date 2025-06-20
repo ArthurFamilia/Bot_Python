@@ -1,18 +1,19 @@
 import pandas as pd
 import numpy as np
 from strategy import TradingStrategy
+import config  # Importa as configurações do arquivo config.py
 
 class Backtester:
     """
     Classe para simular operações de trading com base nos sinais da estratégia.
     """
-    def __init__(self, initial_balance=1000.0, fee=0.04):
+    def __init__(self, initial_balance=config.saldo_backtest, fee=0.04):
         # Saldo inicial da simulação
         self.initial_balance = initial_balance
         # Taxa de corretagem (exemplo: 0.04%)
         self.fee = fee
 
-    def run(self, df: pd.DataFrame, strategy: TradingStrategy, risk_percentage=2.0):
+    def run(self, df: pd.DataFrame, strategy: TradingStrategy, risk_percentage=config.risco):
         # Inicializa variáveis de controle
         balance = self.initial_balance
         position = 0  # 1 para comprado, -1 para vendido, 0 para fora
@@ -67,7 +68,7 @@ class Optimizer:
         self.backtester = backtester
         self.strategy_class = strategy_class
 
-    def optimize(self, df: pd.DataFrame, param_grid: dict, risk_percentage=3.0):
+    def optimize(self, df: pd.DataFrame, param_grid: dict, risk_percentage=config.risco):
         # Busca os melhores parâmetros de médias móveis
         best_result = -np.inf
         best_params = None

@@ -4,14 +4,15 @@ import pandas as pd
 from conexao import BinanceConnection
 from backtest import Backtester
 from strategy import TradingStrategy
+import config
 
 # Carregue suas chaves da Binance do .env ou defina diretamente aqui
 API_KEY = os.getenv('BINANCE_API_KEY', 'SUA_API_KEY')
 API_SECRET = os.getenv('BINANCE_API_SECRET', 'SEU_API_SECRET')
 
 # Parâmetros de busca de dados
-SYMBOL = 'ETH/USDT'
-INTERVAL = '1d'
+SYMBOL = config.simbolo
+INTERVAL = config.intervalo  
 LIMIT = 5000
 
 # Conecte-se à Binance e obtenha os dados históricos
@@ -30,10 +31,10 @@ if df is None:
 backtester = Backtester()
 
 # Defina a estratégia
-strategy = TradingStrategy(short_window=24, long_window=50)
+strategy = TradingStrategy(short_window=config.MArapida, long_window=config.MAlenta)
 
 # Execute o backtest
-final_balance, trades = backtester.run(df, strategy, risk_percentage=0.03)
+final_balance, trades = backtester.run(df, strategy, risk_percentage=config.risco)
 
 # Converter trades para DataFrame
 trades_df = pd.DataFrame(trades)
