@@ -13,7 +13,7 @@ class Backtester:
         # Taxa de corretagem (exemplo: 0.04%)
         self.fee = fee
 
-    def run(self, df: pd.DataFrame, strategy: TradingStrategy, risk_percentage=config.risco):
+    def run(self, df: pd.DataFrame, strategy: TradingStrategy):
         # Inicializa variáveis de controle
         balance = self.initial_balance
         position = 0  # 1 para comprado, -1 para vendido, 0 para fora
@@ -32,7 +32,7 @@ class Backtester:
                     balance += pnl
                     trades.append({'type': 'COVER', 'price': price, 'balance': balance})
                 # Abre compra
-                entry_size = (balance * risk_percentage) / price  # Usa saldo atual
+                entry_size = config.valor_fixo_usdt / price  # Valor fixo em USDT
                 entry_price = price
                 position = 1
                 trades.append({'type': 'BUY', 'price': price, 'balance': balance})
@@ -43,7 +43,7 @@ class Backtester:
                     balance += pnl
                     trades.append({'type': 'SELL', 'price': price, 'balance': balance})
                 # Abre venda
-                entry_size = (balance * risk_percentage) / price  # Usa saldo atual
+                entry_size = config.valor_fixo_usdt / price  # Valor fixo em USDT
                 entry_price = price
                 position = -1
                 trades.append({'type': 'SHORT', 'price': price, 'balance': balance})
@@ -68,7 +68,7 @@ class Optimizer:
         self.backtester = backtester
         self.strategy_class = strategy_class
 
-    def optimize(self, df: pd.DataFrame, param_grid: dict, risk_percentage=config.risco):
+    def optimize(self, df: pd.DataFrame, param_grid: dict):
         # Busca os melhores parâmetros de médias móveis
         best_result = -np.inf
         best_params = None
@@ -78,7 +78,7 @@ class Optimizer:
                 if short >= long:
                     continue  # short_window deve ser menor que long_window
                 strategy = self.strategy_class(short_window=short, long_window=long)
-                final_balance, _ = self.backtester.run(df.copy(), strategy, risk_percentage)
+                final_balance, _ = self.backtester.run(df.copy(), strategy)
                 results.append({'short_window': short, 'long_window': long, 'final_balance': final_balance})
                 if final_balance > best_result:
                     best_result = final_balance

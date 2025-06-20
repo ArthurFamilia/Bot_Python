@@ -34,10 +34,16 @@ backtester = Backtester()
 strategy = TradingStrategy(short_window=config.MArapida, long_window=config.MAlenta)
 
 # Execute o backtest
-final_balance, trades = backtester.run(df, strategy, risk_percentage=config.risco)
+final_balance, trades = backtester.run(df, strategy)
 
 # Converter trades para DataFrame
 trades_df = pd.DataFrame(trades)
+# Adiciona o saldo inicial como primeiro ponto
+saldo_inicial = config.saldo_backtest
+trades_df = pd.concat([
+    pd.DataFrame([{'type': 'START', 'price': None, 'balance': saldo_inicial}]),
+    trades_df
+], ignore_index=True)
 
 # Gráfico da curva de capital
 plt.figure(figsize=(12, 6))

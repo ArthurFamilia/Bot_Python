@@ -1037,3 +1037,7 @@
 2025-06-19 18:52:29,244 - INFO - Conexão com a Binance Futures bem-sucedida! Timestamp: 1750369948693
 2025-06-19 18:52:29,245 - INFO - Starting trading bot for BTC/USDT on 1m timeframe
 2025-06-19 21:17:03,506 - ERROR - Erro ao buscar dados históricos: binance {"code":-2008,"msg":"Invalid Api-Key ID."}
+2025-06-19 22:44:41,506 - ERROR - Erro ao buscar dados históricos: binance does not have market symbol MATIC/USDT
+2025-06-19 22:44:41,507 - ERROR - Erro ao buscar dados históricos: binance does not have market symbol MATIC/USDT
+2025-06-19 22:44:41,507 - ERROR - Erro ao buscar dados históricos: binance does not have market symbol MATIC/USDT
+2025-06-19 22:44:41,507 - ERROR - Erro ao buscar dados históricos: binance does not have market symbol MATIC/USDT
