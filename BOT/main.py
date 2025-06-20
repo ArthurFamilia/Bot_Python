@@ -163,46 +163,9 @@ def main():
     )
     # Evento para controlar execução do bot (iniciar/pausar)
     run_event = threading.Event()
-    run_event.clear()  # Começa pausado
-    # Cria thread para rodar o loop do bot em paralelo ao menu
-    bot_thread = threading.Thread(target=bot_loop, args=(run_event,), daemon=True)
-    bot_thread.start()
-    # Exibe menu interativo
-    print("\n=== MENU DO BOT DE TRADING ===")
-    print("[1] Iniciar bot")
-    print("[2] Pausar bot")
-    print("[3] Retomar bot")
-    print("[4] Sair")
-    while True:
-        op = input("Escolha uma opção: ").strip()
-        if op == '1':
-            # Inicia o bot (ativa o evento)
-            if not run_event.is_set():
-                run_event.set()
-                print("Bot iniciado!")
-            else:
-                print("Bot já está rodando.")
-        elif op == '2':
-            # Pausa o bot (limpa o evento)
-            if run_event.is_set():
-                run_event.clear()
-                print("Bot pausado.")
-            else:
-                print("Bot já está pausado.")
-        elif op == '3':
-            # Retoma o bot (ativa o evento)
-            if not run_event.is_set():
-                run_event.set()
-                print("Bot retomado!")
-            else:
-                print("Bot já está rodando.")
-        elif op == '4':
-            # Encerra o programa
-            print("Encerrando...")
-            run_event.clear()
-            break
-        else:
-            print("Opção inválida.")
+    run_event.set()  # Começa rodando imediatamente
+    # Roda o loop do bot na thread principal (sem menu)
+    bot_loop(run_event)
 
 if __name__ == "__main__":
     main()
