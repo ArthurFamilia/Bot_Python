@@ -18,7 +18,7 @@ LIMIT = 5000
 # Conecte-se à Binance e obtenha os dados históricos
 df = None
 try:
-    conn = BinanceConnection(API_KEY, API_SECRET, testnet=False)
+    conn = BinanceConnection(API_KEY, API_SECRET)  # testnet controlado pelo config.py
     df = conn.get_historical_klines(SYMBOL, INTERVAL, LIMIT)
 except Exception as e:
     print(f'Erro ao conectar ou obter dados: {e}')

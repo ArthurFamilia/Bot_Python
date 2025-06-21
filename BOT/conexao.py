@@ -8,14 +8,17 @@ import logging
 dotenv.load_dotenv()
 
 class BinanceConnection:
-    def __init__(self, api_key: str, api_secret: str, testnet: bool = False):
+    def __init__(self, api_key: str, api_secret: str, testnet: bool = None):
         """
         Inicializa a conexão com a Binance usando ccxt.
         Parâmetros:
             api_key (str): Sua chave de API da Binance
             api_secret (str): Seu segredo de API da Binance
-            testnet (bool): Se True, conecta na testnet de futuros
+            testnet (bool): Se None, usa config.usar_testnet; se True/False, sobrescreve
         """
+        import config
+        if testnet is None:
+            testnet = config.usar_testnet
         # Configura o cliente ccxt para Binance Futures
         if testnet:
             self.client = ccxt.binance({

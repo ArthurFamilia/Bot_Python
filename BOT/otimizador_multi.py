@@ -21,7 +21,7 @@ GRID = {
 
 def otimizar_parametros():
     # Conecte-se à Binance
-    conn = BinanceConnection(API_KEY, API_SECRET, testnet=False)
+    conn = BinanceConnection(API_KEY, API_SECRET)  # testnet controlado pelo config.py
     
     # Dicionário para armazenar os melhores resultados
     melhores_resultados = {}

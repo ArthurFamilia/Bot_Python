@@ -21,7 +21,7 @@ def bot_loop(run_event):
     if not api_key or not api_secret:
         logger.error("API credentials not found in environment variables")
         return
-    connection = BinanceConnection(api_key, api_secret, testnet=True)  # Mudar para False em produção
+    connection = BinanceConnection(api_key, api_secret)  # testnet controlado pelo config.py
     # Testa a conexão antes de iniciar o loop
     if not connection.test_connection():
         logger.error("Falha ao conectar com a API da Binance. O bot será encerrado.")
