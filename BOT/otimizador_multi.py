@@ -9,8 +9,8 @@ API_KEY = os.getenv('BINANCE_API_KEY', 'SUA_API_KEY')
 API_SECRET = os.getenv('BINANCE_API_SECRET', 'SEU_API_SECRET')
 
 # Lista de símbolos e intervalos para testar
-SYMBOLS = ['BTC/USDT', 'ETH/USDT', 'BNB/USDT', 'ADA/USDT', 'XRP/USDT', 'SOL/USDT', 'HBAR/USDT', 'DOGE/USDT', 'MATIC/USDT', 'DOT/USDT', 'TRX/USDT', 'LTC/USDT', 'AVAX/USDT', 'LINK/USDT']
-INTERVALS = ['1h', '2h', '4h', '1d']
+SYMBOLS = ['BNB/USDT', 'ADA/USDT', 'XRP/USDT', 'SOL/USDT', 'HBAR/USDT', 'DOGE/USDT', 'DOT/USDT']
+INTERVALS = ['4h', '12h', '1d']
 LIMIT = 5000
 
 # Grade de parâmetros para otimização
