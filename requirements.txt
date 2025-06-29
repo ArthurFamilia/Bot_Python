@@ -1,0 +1,5 @@
+ccxt
+pandas
+ta
+python-dotenv
+matplotlib

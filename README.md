@@ -1,82 +1,99 @@
 # Trading Bot Python
 
-Este é um bot de trading automatizado desenvolvido em Python para operar na exchange Binance. O bot utiliza uma estratégia de cruzamento de médias móveis para tomar decisões de compra e venda de criptomoedas.
+Um bot de trading para Binance Futures, com backtest, otimização e execução real, totalmente configurável e fácil de usar. Desenvolvido para profissionais de TI, traders quantitativos e entusiastas de automação financeira.
 
 ## Funcionalidades
-
-- Conexão com a API da Binance
-- Estratégia de trading baseada em cruzamento de médias móveis
-- Suporte a backtesting para teste de estratégias
-- Otimização de parâmetros
-- Sistema de logs para monitoramento
-- Modo testnet para testes seguros
+- **Execução real e em testnet** (Binance Futures via CCXT)
+- **Backtest** com os mesmos parâmetros e lógica do bot real
+- **Otimização automática** de parâmetros de estratégia
+- **Filtros de tendência e distância mínima** entre médias móveis
+- **Logs detalhados** e fácil integração com sistemas de monitoramento
+- **Configuração centralizada** via `config.py`
 
 ## Requisitos
+- Python 3.9+
+- Conta na Binance (API Key e Secret)
+- [CCXT](https://github.com/ccxt/ccxt), [pandas](https://pandas.pydata.org/), [ta-lib](https://github.com/bukosabino/ta), [python-dotenv](https://github.com/theskumar/python-dotenv), [matplotlib](https://matplotlib.org/)
 
-- Python 3.11 ou superior
-- Conta na Binance
-- Chaves de API da Binance (API Key e Secret Key)
-
-## Estrutura do Projeto
-
-```
-BOT/
-├── backtest.py      # Módulo para backtesting de estratégias
-├── conexao.py       # Módulo de conexão com a Binance
-├── main.py          # Arquivo principal do bot
-├── otimizador_.py   # Otimização de parâmetros da estratégia
-└── strategy.py      # Implementação da estratégia de trading
+Instale as dependências:
+```bash
+pip install -r requirements.txt
 ```
 
 ## Configuração
+1. **Crie um arquivo `.env`** com suas chaves:
+   ```env
+   BINANCE_API_KEY=SEU_API_KEY
+   BINANCE_API_SECRET=SEU_API_SECRET
+   ```
+2. **Edite o arquivo `config.py`** para definir:
+   - Par de trading (`simbolo`)
+   - Intervalo dos candles (`intervalo`)
+   - Parâmetros das médias móveis
+   - Saldo inicial, valor por operação, filtros, etc.
 
-1. Clone este repositório
-2. Instale as dependências necessárias
-3. Crie um arquivo `.env` na raiz do projeto com suas credenciais:
+## Como usar
 
+### 1. Backtest
+Execute o backtest para avaliar a estratégia:
+```bash
+python BOT/run_backtest.py
 ```
-BINANCE_API_KEY=sua_api_key
-BINANCE_API_SECRET=sua_api_secret
+
+### 2. Otimização de Parâmetros
+Encontre os melhores parâmetros para sua estratégia:
+```bash
+python BOT/otimizador_multi.py
 ```
+Os resultados ficam em `resultados_otimizacao.csv`.
 
-## Como Usar
-
-1. Configure suas credenciais no arquivo `.env`
-2. Execute o bot:
+### 3. Execução do Bot Real
+O bot principal está em `main.py` e pode ser executado com:
 ```bash
 python BOT/main.py
 ```
+> **Dica:** Use um gerenciador de processos (ex: PM2, Supervisor, Docker) para rodar o bot em produção.
 
-## Estratégia de Trading
-
-O bot utiliza uma estratégia de cruzamento de médias móveis:
-- Média móvel curta: 20 períodos
-- Média móvel longa: 50 períodos
-
-Os parâmetros podem ser otimizados utilizando o módulo `otimizador_.py`.
-
-## Backtesting
-
-Para testar a estratégia com dados históricos:
+### 4. Teste Unitário da Estratégia
 ```bash
-python BOT/backtest.py
+python BOT/test_strategy.py
 ```
 
-## Logs
+## Estrutura dos Arquivos
+- `config.py`: Parâmetros globais e filtros
+- `main.py`: Bot de trading real
+- `run_backtest.py`: Backtest da estratégia
+- `otimizador_multi.py`: Otimização de parâmetros
+- `strategy.py`: Lógica da estratégia (médias móveis, filtros)
+- `backtest.py`: Motor de simulação
+- `conexao.py`: Interface com a Binance (CCXT)
+- `test_strategy.py`: Teste unitário da estratégia
 
-O bot mantém um registro detalhado de suas operações no arquivo `trading_bot.log`.
+## Estratégia
+- Baseada em cruzamento de médias móveis exponenciais
+- Filtros opcionais de tendência e distância mínima
+- Parâmetros ajustáveis via `config.py` ou otimização automática
 
-## ⚠️ Aviso de Risco
+## Logs e Monitoramento
+- Todos os logs são salvos em `trading_bot.log`
+- Prints importantes no console
+- Fácil integração com sistemas de alerta (adapte o logger se necessário)
 
-Este bot é fornecido apenas para fins educacionais. Trading de criptomoedas envolve riscos significativos. Use por sua conta e risco. Recomenda-se sempre testar primeiro no ambiente testnet antes de usar com dinheiro real.
+## Segurança
+- **Nunca compartilhe suas chaves de API.**
+- Use a testnet para validar antes de operar com dinheiro real.
+- Limite o valor de cada operação em `config.py`.
 
-## Contribuições
+## Dicas para Deploy Profissional
+- Use Docker ou ambiente virtual isolado
+- Monitore o processo e o arquivo de log
+- Faça backup dos arquivos de configuração e resultados
+- Teste exaustivamente em testnet antes de operar ao vivo
 
-Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou enviar pull requests.
+## Suporte e Customização
+- O código é modular e fácil de adaptar para outras estratégias
+- Para dúvidas ou melhorias, abra uma issue ou faça um fork
 
-## Licença
+---
 
-Este projeto está sob a licença MIT.
-
-
-Fazer testes antes de usar, tem q saber fazer backtest e otimizaçao e revisar o codigo tbm.
+**Desenvolvido por Arthur Age se você nao sabe o que esta fazendo não use este sistema e se sabe use por sua conta e risco.**

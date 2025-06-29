@@ -9,11 +9,8 @@ import json
 from datetime import datetime
 import config 
 
-# Carrega variáveis de ambiente do arquivo .env
 load_dotenv()
 
-# Função que executa o loop principal do bot de trading
-# O loop só roda quando run_event está ativado (set)
 def bot_loop(run_event):
     logger = logging.getLogger(__name__)
     api_key = os.getenv('BINANCE_API_KEY')
@@ -21,16 +18,15 @@ def bot_loop(run_event):
     if not api_key or not api_secret:
         logger.error("API credentials not found in environment variables")
         return
-    connection = BinanceConnection(api_key, api_secret, testnet=True)  # Mudar para False em produção
-    # Testa a conexão antes de iniciar o loop
+    connection = BinanceConnection(api_key, api_secret)
     if not connection.test_connection():
-        logger.error("Falha ao conectar com a API da Binance. O bot será encerrado.")
-        print("[ERRO] Falha ao conectar com a API da Binance. Verifique suas credenciais e conexão com a internet.")
+        logger.error("Falha ao conectar com a API da Binance.")
+        print("[ERRO] Falha ao conectar com a API da Binance.")
         return
     strategy = TradingStrategy(short_window=config.MArapida, long_window=config.MAlenta)
-    symbol = config.simbolo  # Par de negociação para ccxt
-    interval = config.intervalo    # Intervalo do candle
-    logger.info(f"Starting trading bot for {symbol} on {interval} timeframe")
+    symbol = config.simbolo
+    interval = config.intervalo
+    logger.info(f"Starting trading bot for {symbol} on {interval}")
     trade_state = {
         'open': False,
         'side': None,
@@ -42,38 +38,26 @@ def bot_loop(run_event):
         print('Bot rodando')
         while True:
             run_event.wait()
-            # Busca dados históricos
             df = connection.get_historical_klines(symbol, interval)
             if df is None:
                 time.sleep(15)
                 continue
-            # Consulta saldo da conta
             balance = connection.get_account_balance()
             usdt_cross = None
             if balance and 'info' in balance and 'assets' in balance['info']:
                 for asset in balance['info']['assets']:
                     if asset['asset'] == 'USDT':
                         usdt_cross = float(asset['crossWalletBalance'])
-                print(f"Saldo USDT: {usdt_cross:.8f}")
-            else:
-                print("[ERRO] Não foi possível obter saldo em USDT.")
-            # Consulta posições abertas
-            positions = balance['info']['positions'] if balance and 'info' in balance and 'positions' in balance['info'] else []
-            open_positions = [p for p in positions if float(p.get('positionAmt', 0)) != 0]
-            if open_positions:
-                print("Há posição aberta.")
-            else:
-                print("Nenhuma posição aberta.")
-            # Calcula sinais da estratégia
             df = strategy.calculate_signals(df)
             if df is None:
                 time.sleep(15)
                 continue
             # Pega o último sinal gerado
             current_signal = df['signal'].iloc[-1]
-            signal_changed = df['position_change'].iloc[-1] != 0
+            trade_signal = df['trade_signal'].iloc[-1]
             now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            if signal_changed:
+            # Só executa trade se houver mudança de posição
+            if trade_signal != 0:
                 if not balance or not ('total' in balance and 'USDT' in balance['total']):
                     time.sleep(2)
                     continue
@@ -86,7 +70,7 @@ def bot_loop(run_event):
                 if not trade_state['open'] and position_size:
                     if current_signal == 1:
                         order = connection.place_order(symbol, 'buy', position_size)
-                        print(f"Abertura de operação: COMPRA {position_size} @ {current_price}")
+                        print(f"Abertura de operação: COMPRA {position_size} @ {current_price} | Saldo USDT: {usdt_cross if usdt_cross is not None else 'N/A'}")
                         trade_state.update({
                             'open': True,
                             'side': 'buy',
@@ -96,7 +80,7 @@ def bot_loop(run_event):
                         })
                     elif current_signal == -1:
                         order = connection.place_order(symbol, 'sell', position_size)
-                        print(f"Abertura de operação: VENDA {position_size} @ {current_price}")
+                        print(f"Abertura de operação: VENDA {position_size} @ {current_price} | Saldo USDT: {usdt_cross if usdt_cross is not None else 'N/A'}")
                         trade_state.update({
                             'open': True,
                             'side': 'sell',
@@ -117,11 +101,18 @@ def bot_loop(run_event):
                     pnl = (exit_price - trade_state['entry_price']) * trade_state['entry_volume']
                     if trade_state['side'] == 'sell':
                         pnl = -pnl
-                    print(f"Fechamento de operação: {trade_state['side'].upper()} lucro/prejuízo: {pnl:.2f}")
+                    print(f"Fechamento de operação: {trade_state['side'].upper()} lucro/prejuízo: {pnl:.2f} | Saldo USDT: {usdt_cross if usdt_cross is not None else 'N/A'}")
                     # Salva trade no arquivo JSON
                     try:
+                        # Garante que o arquivo existe
+                        if not os.path.exists('BOT/trades.json'):
+                            with open('BOT/trades.json', 'w', encoding='utf-8') as f:
+                                json.dump([], f)
                         with open('BOT/trades.json', 'r+', encoding='utf-8') as f:
-                            trades = json.load(f)
+                            try:
+                                trades = json.load(f)
+                            except json.JSONDecodeError:
+                                trades = []
                             trades.append({
                                 'side': trade_state['side'],
                                 'entry_time': trade_state['entry_time'],
@@ -134,8 +125,9 @@ def bot_loop(run_event):
                             })
                             f.seek(0)
                             json.dump(trades, f, indent=4)
-                    except Exception:
-                        pass
+                            f.truncate()
+                    except Exception as e:
+                        logger.error(f'Erro ao salvar trade no arquivo trades.json: {e}')
                     # Reseta estado da posição
                     trade_state = {
                         'open': False,
