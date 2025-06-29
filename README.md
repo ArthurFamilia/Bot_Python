@@ -1,102 +1,99 @@
 # Trading Bot Python
 
-Este é um bot de trading automatizado desenvolvido em Python para operar na Binance Futures, utilizando uma estratégia de cruzamento de médias móveis exponenciais (EMAs). O projeto suporta operação real e testnet, além de módulos para backtest e otimização de parâmetros.
+Um bot de trading para Binance Futures, com backtest, otimização e execução real, totalmente configurável e fácil de usar. Desenvolvido para profissionais de TI, traders quantitativos e entusiastas de automação financeira.
 
 ## Funcionalidades
-
-- Operação automatizada na Binance Futures (real ou testnet)
-- Estratégia baseada em cruzamento de EMAs
-- Gerenciamento de risco por valor fixo em USDT
-- Sistema de logs detalhado
-- Módulo de backtest
-- Otimizador de parâmetros multi-símbolo e multi-intervalo
-- Configuração centralizada do ambiente (testnet/produção)
+- **Execução real e em testnet** (Binance Futures via CCXT)
+- **Backtest** com os mesmos parâmetros e lógica do bot real
+- **Otimização automática** de parâmetros de estratégia
+- **Filtros de tendência e distância mínima** entre médias móveis
+- **Logs detalhados** e fácil integração com sistemas de monitoramento
+- **Configuração centralizada** via `config.py`
 
 ## Requisitos
+- Python 3.9+
+- Conta na Binance (API Key e Secret)
+- [CCXT](https://github.com/ccxt/ccxt), [pandas](https://pandas.pydata.org/), [ta-lib](https://github.com/bukosabino/ta), [python-dotenv](https://github.com/theskumar/python-dotenv), [matplotlib](https://matplotlib.org/)
 
-- Python 3.11 ou superior
-- Conta na Binance (e chaves de API)
-- Pacotes: ccxt, pandas, matplotlib, python-dotenv
-
-## Estrutura do Projeto
-
-```
-BOT/
-├── backtest.py           # Módulo para backtesting de estratégias
-├── conexao.py            # Módulo de conexão com a Binance
-├── main.py               # Arquivo principal do bot
-├── otimizador_multi.py   # Otimização de parâmetros da estratégia
-├── run_backtest.py       # Execução de backtest com gráficos
-├── strategy.py           # Implementação da estratégia de trading
-├── config.py             # Configurações gerais do bot
-└── ...
+Instale as dependências:
+```bash
+pip install -r requirements.txt
 ```
 
 ## Configuração
-
-1. Clone este repositório
-2. Instale as dependências necessárias:
-   ```bash
-   pip install -r requirements.txt
-   ```
-3. Crie um arquivo `.env` na raiz do projeto com suas credenciais:
+1. **Crie um arquivo `.env`** com suas chaves:
    ```env
-   BINANCE_API_KEY=sua_api_key
-   BINANCE_API_SECRET=sua_api_secret
+   BINANCE_API_KEY=SEU_API_KEY
+   BINANCE_API_SECRET=SEU_API_SECRET
    ```
-4. Configure o arquivo `BOT/config.py`:
-   - Par de trading, intervalos, parâmetros das médias, saldo inicial, valor por operação e se deseja usar testnet:
-   ```python
-   simbolo = 'HBAR/USDT'
-   intervalo = '12h'
-   MArapida = 30
-   MAlenta = 40
-   saldo_backtest = 500.0
-   valor_fixo_usdt = 20
-   usar_testnet = False  # True para testnet, False para produção
-   ```
+2. **Edite o arquivo `config.py`** para definir:
+   - Par de trading (`simbolo`)
+   - Intervalo dos candles (`intervalo`)
+   - Parâmetros das médias móveis
+   - Saldo inicial, valor por operação, filtros, etc.
 
-## Como Usar
+## Como usar
 
-### Operação ao vivo
-```bash
-python BOT/main.py
-```
-
-### Backtest
+### 1. Backtest
+Execute o backtest para avaliar a estratégia:
 ```bash
 python BOT/run_backtest.py
 ```
 
-### Otimização de Parâmetros
+### 2. Otimização de Parâmetros
+Encontre os melhores parâmetros para sua estratégia:
 ```bash
 python BOT/otimizador_multi.py
 ```
-Os melhores parâmetros serão salvos em `resultados_otimizacao.csv`.
+Os resultados ficam em `resultados_otimizacao.csv`.
 
-## Estratégia de Trading
+### 3. Execução do Bot Real
+O bot principal está em `main.py` e pode ser executado com:
+```bash
+python BOT/main.py
+```
+> **Dica:** Use um gerenciador de processos (ex: PM2, Supervisor, Docker) para rodar o bot em produção.
 
-O bot utiliza cruzamento de médias móveis exponenciais:
-- Média móvel curta: configurável (`MArapida`)
-- Média móvel longa: configurável (`MAlenta`)
-- Valor fixo por operação: configurável (`valor_fixo_usdt`)
+### 4. Teste Unitário da Estratégia
+```bash
+python BOT/test_strategy.py
+```
 
-## Logs
+## Estrutura dos Arquivos
+- `config.py`: Parâmetros globais e filtros
+- `main.py`: Bot de trading real
+- `run_backtest.py`: Backtest da estratégia
+- `otimizador_multi.py`: Otimização de parâmetros
+- `strategy.py`: Lógica da estratégia (médias móveis, filtros)
+- `backtest.py`: Motor de simulação
+- `conexao.py`: Interface com a Binance (CCXT)
+- `test_strategy.py`: Teste unitário da estratégia
 
-Todas as operações e eventos importantes são registrados em `trading_bot.log`.
+## Estratégia
+- Baseada em cruzamento de médias móveis exponenciais
+- Filtros opcionais de tendência e distância mínima
+- Parâmetros ajustáveis via `config.py` ou otimização automática
 
-## Aviso de Risco
+## Logs e Monitoramento
+- Todos os logs são salvos em `trading_bot.log`
+- Prints importantes no console
+- Fácil integração com sistemas de alerta (adapte o logger se necessário)
 
-Este bot é fornecido apenas para fins educacionais. Trading de criptomoedas envolve riscos significativos. Use por sua conta e risco. Sempre teste no ambiente testnet antes de operar com dinheiro real.
+## Segurança
+- **Nunca compartilhe suas chaves de API.**
+- Use a testnet para validar antes de operar com dinheiro real.
+- Limite o valor de cada operação em `config.py`.
 
-## Contribuições
+## Dicas para Deploy Profissional
+- Use Docker ou ambiente virtual isolado
+- Monitore o processo e o arquivo de log
+- Faça backup dos arquivos de configuração e resultados
+- Teste exaustivamente em testnet antes de operar ao vivo
 
-Contribuições são bem-vindas! Abra issues ou envie pull requests.
+## Suporte e Customização
+- O código é modular e fácil de adaptar para outras estratégias
+- Para dúvidas ou melhorias, abra uma issue ou faça um fork
 
-## Licença
+---
 
-MIT
-
-## Recado
-
-Fazer testes antes de usar, tem que saber fazer backtest e otimização, se fizer merda e perder dinheiro, a culpa é sua, não minha. Use por sua conta e risco, não sou responsável por perdas financeiras. Este bot é para fins educacionais e de aprendizado, não para fazer dinheiro fácil.
+**Desenvolvido por Arthur Age se você nao sabe o que esta fazendo não use este sistema e se sabe use por sua conta e risco.**

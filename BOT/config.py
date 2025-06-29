@@ -1,7 +1,13 @@
-simbolo = 'HBAR/USDT'
-intervalo = '12h'
-MArapida = 30
-MAlenta = 40
-saldo_backtest = 500.0  # Saldo inicial para backtest
-valor_fixo_usdt = 20  # Valor fixo em USDT para cada operação
-usar_testnet = False  # Defina True para usar a testnet, False para produção
+simbolo = 'ETH/USDT'
+intervalo = '2h' 
+MArapida = 10
+MAlenta = 44
+saldo_backtest = 5000.0  
+valor_fixo_usdt = 500  
+usar_testnet = False  
+
+# Filtros de estratégia
+ativar_filtro_tendencia = True  # Ativa filtro de tendência
+ativar_filtro_distancia = True  # Ativa filtro de distância mínima
+# Distância mínima entre médias (ex: 0.005 = 0.5%)
+distancia_minima_percent = 0.001  # Distância mínima entre médias em porcentagem
